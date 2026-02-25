@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AbsensiKelas — Rekap</title>
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+
+<body>
+  <!-- LOADER (muncul saat awal buka) -->
+  <div id="appLoader" class="app-loader" aria-hidden="true">
+    <div class="loader-card">
+      <img class="loader-logo" src="assets/img/logo.png" alt="Logo Aplikasi" />
+      <div class="loader-ring" aria-hidden="true"></div>
+      <p class="loader-text">
+        Memuat AbsensiKelas<span class="dots" aria-hidden="true"></span>
+      </p>
+    </div>
+  </div>
+
+  <!-- BACKDROP untuk efek blur/dim saat sidebar terbuka -->
+  <div id="backdrop" class="backdrop" aria-hidden="true"></div>
+
+  <!-- SIDEBAR DRAWER -->
+  <aside id="sidebar" class="sidebar" aria-label="Navigasi utama">
+    <div class="sidebar-inner">
+      <div class="sidebar-top">
+        <img src="assets/img/logo.png" class="sidebar-logo" alt="Logo" />
+        <button id="btnCloseSidebar" class="icon-btn close-btn" aria-label="Tutup menu">✕</button>
+      </div>
+
+<nav class="menu" aria-label="Menu">
+  <a class="menu-item" href="index.html">
+    <span class="menu-icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none">
+        <path d="M4 13h7V4H4v9Zm9 7h7V11h-7v9ZM4 20h7v-5H4v5Zm9-11h7V4h-7v5Z" fill="currentColor"/>
+      </svg>
+    </span>
+    <span class="menu-text">Dashboard</span>
+  </a>
+
+  <a class="menu-item" href="mahasiswa.html">
+    <span class="menu-icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none">
+        <path d="M12 12a4 4 0 1 0-4-4 4 4 0 0 0 4 4Zm0 2c-4.42 0-8 2-8 4.5V20h16v-1.5c0-2.5-3.58-4.5-8-4.5Z" fill="currentColor"/>
+      </svg>
+    </span>
+    <span class="menu-text">Data Mahasiswa</span>
+  </a>
+
+  <a class="menu-item" href="absensi.html">
+    <span class="menu-icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none">
+        <path d="M7 2h2v2h6V2h2v2h3v18H4V4h3V2Zm13 8H6v10h14V10Z" fill="currentColor"/>
+      </svg>
+    </span>
+    <span class="menu-text">Absensi</span>
+  </a>
+
+  <a class="menu-item" href="rekap.html">
+    <span class="menu-icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none">
+        <path d="M4 4h16v2H4V4Zm0 6h10v2H4v-2Zm0 6h16v2H4v-2Z" fill="currentColor"/>
+      </svg>
+    </span>
+    <span class="menu-text">Rekap</span>
+  </a>
+
+  <a class="menu-item" href="login.html">
+    <span class="menu-icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none">
+        <path d="M10 17v2H4V5h6v2H6v10h4Zm9.59-5L16 8.41 17.41 7 23 12l-5.59 5-1.41-1.41L19.59 13H10v-2h9.59Z" fill="currentColor"/>
+      </svg>
+    </span>
+    <span class="menu-text">Login</span>
+  </a>
+</nav>
+
+      <div class="sidebar-bottom">
+        <button id="btnLogout" class="logout-btn" type="button">
+          <span class="menu-icon" aria-hidden="true">
+            <!-- icon logout -->
+            <svg viewBox="0 0 24 24" fill="none">
+              <path d="M10 17v2H4V5h6v2H6v10h4Zm9.59-5L16 8.41 17.41 7 23 12l-5.59 5-1.41-1.41L19.59 13H10v-2h9.59Z" fill="currentColor"/>
+            </svg>
+          </span>
+          <span>Logout</span>
+        </button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- TOPBAR -->
+  <header class="topbar">
+    <div class="topbar-inner">
+      <button id="btnOpenSidebar" class="icon-btn" aria-label="Buka menu">☰</button>
+      <div class="topbar-title">
+        <div class="title">Dashboard</div>
+        <div class="subtitle">Sistem Absensi Kelas Berbasis Web</div>
+      </div>
+      <button class="icon-btn" aria-label="Pengaturan">⚙</button>
+    </div>
+  </header>
+
+  <!-- MAIN CONTENT -->
+<main class="container">
+  <section class="grid-cards">
+    <article class="glass-card">
+      <h3>Total Mahasiswa</h3>
+      <p class="big" id="rekapTotalMhs">0</p>
+      <p class="muted">Dari localStorage</p>
+    </article>
+
+    <article class="glass-card">
+      <h3>Total Absensi</h3>
+      <p class="big" id="rekapTotalAbs">0</p>
+      <p class="muted">Record absensi tersimpan</p>
+    </article>
+
+    <article class="glass-card">
+      <h3>Ringkasan Status</h3>
+      <p class="muted">Hadir: <b id="rekapHadir">0</b> | Izin: <b id="rekapIzin">0</b></p>
+      <p class="muted">Sakit: <b id="rekapSakit">0</b> | Alpa: <b id="rekapAlpa">0</b></p>
+    </article>
+  </section>
+
+  <section class="glass-card">
+    <h2>Filter Rekap</h2>
+
+    <div class="form-grid">
+      <div class="field">
+        <label for="rekapKelas">Kelas</label>
+        <select id="rekapKelas">
+          <option value="">Semua kelas</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="rekapTanggal">Tanggal</label>
+        <input id="rekapTanggal" type="date" />
+        <small class="hint">Kosongkan untuk semua tanggal</small>
+      </div>
+    </div>
+
+    <div class="actions">
+      <button class="btn primary" id="btnFilterRekap" type="button">Terapkan Filter</button>
+      <button class="btn ghost" id="btnResetRekap" type="button">Reset</button>
+    </div>
+  </section>
+
+  <section class="glass-card">
+    <h2>Data Rekap</h2>
+    <div class="table-wrap">
+      <table class="table" aria-label="Tabel rekap absensi">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Tanggal</th>
+            <th>NIM</th>
+            <th>Nama</th>
+            <th>Kelas</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody id="rekapBody">
+          <tr><td colspan="6" class="muted center">Tidak ada data untuk ditampilkan.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+</main>
+
+  <footer class="footer">
+    <div class="container">
+      <small>© 2026 AbsensiKelas — UI Drawer Modern</small>
+    </div>
+  </footer>
+
+  <script src="assets/js/app.js"></script>
+</body>
+</html>

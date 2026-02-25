@@ -1,0 +1,27 @@
+[
+    {
+        "nim": "2423102087",
+        "nama": "Yahfi Al Farisy",
+        "kelas": "II RKS B",
+        "angkatan": "2024",
+        "id": "1771832102452",
+        "created_at": "2026-02-23T07:35:02+00:00",
+        "updated_at": "2026-02-23T07:36:37+00:00"
+    },
+    {
+        "nim": "2423102020",
+        "nama": "Eulia Radifa Meilinawati",
+        "kelas": "II RKS B",
+        "angkatan": "2024",
+        "id": "1771832583442",
+        "created_at": "2026-02-23T07:43:03+00:00"
+    },
+    {
+        "nim": "2423102046",
+        "nama": "Muhaimin Murdiyanto",
+        "kelas": "II RKS B",
+        "angkatan": "2024",
+        "id": "1771832812203",
+        "created_at": "2026-02-23T07:46:52+00:00"
+    }
+]
