@@ -1,0 +1,22 @@
+# Android
+.gradle/
+local.properties
+**/build/
+**/.idea/
+*.iml
+*.apk
+*.aab
+
+# Laravel / PHP
+/vendor/
+/node_modules/
+.env
+.env.*
+storage/*.key
+storage/logs/
+bootstrap/cache/
+public/storage
+
+# OS
+.DS_Store
+Thumbs.db
